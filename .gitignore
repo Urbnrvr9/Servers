@@ -5,6 +5,6 @@
 *.war
 
 # Project exclude paths
-.idea
+.idea/
 target
 
