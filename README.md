@@ -3,7 +3,7 @@
 Для локального запуска проекта:
 
 1. Переопределить [settings.xml](conf/settings.xml).
-2. Добавить пользователя в конфигурации сервер и в [settings.xml](conf/settings.xml).
+2. Добавить пользователя в конфигурации сервера и в [settings.xml](conf/settings.xml).
 3. Запустить сервер.
 4. ```mvn clean package```
 5. ```mvn -P tomcat tomcat7:deploy```
