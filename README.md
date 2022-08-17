@@ -6,6 +6,6 @@
 2. Добавить пользователя в конфигурации сервер и в [settings.xml](conf/settings.xml).
 3. Запустить сервер.
 4. ```mvn clean package```
-5. ```mvn -P tomact tomcat7:deploy```
+5. ```mvn -P tomcat tomcat7:deploy```
 
 * При использовании Apache Tomcat версия должна быть не ниже 10.
