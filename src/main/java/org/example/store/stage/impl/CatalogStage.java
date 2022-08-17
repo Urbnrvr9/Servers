@@ -1,6 +1,5 @@
 package org.example.store.stage.impl;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -11,12 +10,12 @@ import java.util.List;
 
 public class CatalogStage implements FrontStage {
 
-    private final List<String> CATALOG = List.of("white shirt", "blue shirt", "black shirt");
+    private static final List<String> CATALOG = List.of("white shirt", "blue shirt", "black shirt");
 
     @Override
     public void execute(HttpServletRequest rq, HttpServletResponse rs) throws IOException, ServletException {
         rq.setAttribute("catalog", CATALOG);
-        RequestDispatcher dispatcher = rq.getRequestDispatcher("WEB-INF/jsp/catalog.jsp");
+        var dispatcher = rq.getRequestDispatcher("WEB-INF/jsp/catalog.jsp");
         dispatcher.forward(rq,rs);
     }
 }

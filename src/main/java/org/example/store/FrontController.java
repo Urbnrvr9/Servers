@@ -1,44 +1,48 @@
 package org.example.store;
 
-import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.example.store.exception.FrontControllerException;
 import org.example.store.stage.FrontStage;
 import org.example.store.stage.impl.CartStage;
 import org.example.store.stage.impl.CatalogStage;
 
-import java.io.IOException;
+import java.util.Objects;
 
-@WebServlet(name = "FrontController", value = "/frontPage")
+@Slf4j
+@WebServlet(name = "FrontController", value = "/")
 public class FrontController extends HttpServlet {
 
-    private final FrontStage catalogStage = new CatalogStage();
-    private final FrontStage cartStage = new CartStage();
-
-    private final String STAGE = "stage";
-    private final String CATALOG = "catalog";
-    private final String CART = "cart";
+    private static final String STAGE = "stage";
+    private static final String CATALOG = "catalog";
+    private static final String CART = "cart";
 
     @Override
-    protected void doGet(HttpServletRequest rq, HttpServletResponse rs) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest rq, HttpServletResponse rs) {
         rs.setContentType("text/html");
-        FrontStage stage = getStage(rq);
-        stage.execute(rq, rs);
+        try {
+            if (!Objects.nonNull(rq.getParameter(STAGE))) {
+                throw new FrontControllerException("Параметр stage не передан");
+            }
+            var stage = getStage(rq.getParameter(STAGE));
+            stage.execute(rq, rs);
+        } catch (Throwable e) {
+            log.error(ExceptionUtils.getMessage(e));
+        }
     }
 
-    private FrontStage getStage(HttpServletRequest rq) {
-        String name = rq.getParameter(STAGE);
-        switch (name) {
+    private FrontStage getStage(String stage) throws FrontControllerException {
+        switch (stage) {
             case(CATALOG) :
-                return catalogStage;
+                return new CatalogStage();
             case(CART):
-                return cartStage;
+                return new CartStage();
             default:
-                throw new RuntimeException();
+                throw new FrontControllerException("В параметр stage передано неверное значение");
         }
-
-
     }
 }
