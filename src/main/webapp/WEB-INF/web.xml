@@ -4,15 +4,4 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
-  
-  <servlet>
-    <servlet-name>FrontController</servlet-name>
-    <servlet-class>org.example.store.FrontController</servlet-class>
-  </servlet>
-
-  <servlet-mapping>
-    <servlet-name>FrontController</servlet-name>
-    <url-pattern>/main</url-pattern>
-  </servlet-mapping>
-
 </web-app>
