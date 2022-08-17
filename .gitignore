@@ -1,2 +1,10 @@
+# Files Ignoring
+*.iml
+*.log
+*.jar
+*.war
+
 # Project exclude paths
-/target/
+.idea
+target
+
