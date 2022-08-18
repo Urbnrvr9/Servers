@@ -6,7 +6,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-public interface FrontStage {
+public interface Stage {
 
     void execute(HttpServletRequest rq, HttpServletResponse rs) throws IOException, ServletException;
 }
