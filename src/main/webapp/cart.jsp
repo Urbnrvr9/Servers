@@ -7,7 +7,6 @@
     <body>
     <%
         List<String> cart = (List<String>) request.getAttribute("cart");
-
     %>
         <h2>Каталог</h2>
         <div>1: <%= cart.get(0)%></div>
