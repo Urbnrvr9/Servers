@@ -18,5 +18,9 @@
         <a href="main?upload=files">
             <button name="uploadFiles" >Upload Files</button>
         </a>
+        <br/><br/>
+        <a href="main?auth">
+            <button name="auth" >Auth</button>
+        </a>
     </body>
 </html>
