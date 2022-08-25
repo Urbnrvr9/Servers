@@ -9,14 +9,14 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
+import static org.apache.commons.lang3.StringUtils.isEmpty;
 
 @WebServlet(name = "AuthenticationServlet", urlPatterns = {"/authenticationServlet"})
 public class AuthenticationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (!isBlank(req.getParameter("login")) && !isBlank(req.getParameter("password"))) {
+        if (!isEmpty(req.getParameter("login")) && !isEmpty(req.getParameter("password"))) {
             var dispatcher = req.getRequestDispatcher("hello.jsp");
             dispatcher.forward(req, resp);
         } else {
