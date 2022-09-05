@@ -20,6 +20,7 @@ public class FrontController extends HttpServlet {
 
     private static final String STAGE = "stage";
     private static final String UPLOAD = "upload";
+    private static final String AUTH = "auth";
     private static final String CATALOG = "catalog";
     private static final String CART = "cart";
     private static final String FILE = "file";
@@ -27,15 +28,27 @@ public class FrontController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest rq, HttpServletResponse rs) {
-        rs.setContentType("text/html");
+        rs.setContentType("text/html; charset=UTF-8");
         rq.getParameterMap().forEach((k, v) -> {
-            if (k.equals(STAGE)) {
+            if (STAGE.equals(k)) {
                 stageHandler(rq, rs);
             }
-            if (k.equals(UPLOAD)) {
+            if (UPLOAD.equals(k)) {
                 uploadHandler(rq, rs);
             }
+            if (AUTH.equals(k)) {
+                authHandler(rq, rs);
+            }
         });
+    }
+
+    private void authHandler(HttpServletRequest rq, HttpServletResponse rs) {
+        try {
+            var dispatcher = rq.getRequestDispatcher("authentication.jsp");
+            dispatcher.forward(rq, rs);
+        } catch (ServletException | IOException e) {
+            log.error(ExceptionUtils.getStackTrace(e));
+        }
     }
 
     private void stageHandler(HttpServletRequest rq, HttpServletResponse rs) {
@@ -43,7 +56,7 @@ public class FrontController extends HttpServlet {
             var stage = getStage(rq.getParameter(STAGE));
             stage.execute(rq,rs);
         } catch (FrontControllerException e) {
-            log.error(e.getMessage());
+            log.error(ExceptionUtils.getMessage(e));
         } catch (ServletException | IOException e) {
             log.error(ExceptionUtils.getStackTrace(e));
         }
@@ -55,7 +68,7 @@ public class FrontController extends HttpServlet {
             var requestDispatcher = rq.getRequestDispatcher(getUploadJsp(rq.getParameter(UPLOAD)));
             requestDispatcher.forward(rq, rs);
         } catch (FrontControllerException e) {
-            log.error(e.getMessage());
+            log.error(ExceptionUtils.getMessage(e));
         } catch (ServletException | IOException e) {
             log.error(ExceptionUtils.getStackTrace(e));
         }
