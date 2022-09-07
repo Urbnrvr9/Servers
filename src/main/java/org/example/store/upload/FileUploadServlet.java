@@ -37,7 +37,7 @@ public class FileUploadServlet extends HttpServlet {
                     writer.printf(" getSubmittedFileName: %s, ", submittedFileName);
                     writer.printf(" getName: %s, ", partName);
                     part.write(submittedFileName);
-                    writer.printf("The file %s uploaded sucessfully.", submittedFileName);
+                    writer.printf("The file %s uploaded successfully.", submittedFileName);
                 }
             }
         }

@@ -44,7 +44,7 @@ public class FrontController extends HttpServlet {
 
     private void authHandler(HttpServletRequest rq, HttpServletResponse rs) {
         try {
-            var dispatcher = rq.getRequestDispatcher("authentication.jsp");
+            var dispatcher = rq.getRequestDispatcher(JSP.AUTHENTICATION.getJspName());
             dispatcher.forward(rq, rs);
         } catch (ServletException | IOException e) {
             log.error(ExceptionUtils.getStackTrace(e));
@@ -88,9 +88,9 @@ public class FrontController extends HttpServlet {
     private String getUploadJsp(String value) {
         switch (value) {
             case(FILE):
-                return "fileUpload.jsp";
+                return JSP.FILE_UPLOAD.getJspName();
             case(FILES):
-                return "filesUpload.jsp";
+                return JSP.FILES_UPLOAD.getJspName();
             default:
                 throw new FrontControllerException("В параметр upload переданы не верные значения");
         }
