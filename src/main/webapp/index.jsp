@@ -22,5 +22,9 @@
         <a href="main?auth">
             <button name="auth" >Auth</button>
         </a>
+        <br/><br/>
+        <a href="calculatorFirstNumber.jsp">
+            <button name="calculator" >Calculator</button>
+        </a>
     </body>
 </html>

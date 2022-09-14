@@ -6,6 +6,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.example.store.JSP;
 
 import java.io.IOException;
 
@@ -16,15 +17,13 @@ public class AuthenticationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (!isEmpty(req.getParameter("login")) && !isEmpty(req.getParameter("password"))) {
-            var dispatcher = req.getRequestDispatcher("hello.jsp");
-            dispatcher.forward(req, resp);
-        } else {
+        if (isEmpty(req.getParameter("login")) || isEmpty(req.getParameter("password"))) {
             var code = new Cookie("code", "400");
             code.setMaxAge(60*10);
             resp.addCookie(code);
             resp.sendError(400);
         }
-
+        var dispatcher = req.getRequestDispatcher(JSP.HELLO.getJspName());
+        dispatcher.forward(req, resp);
     }
 }
