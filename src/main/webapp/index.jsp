@@ -26,5 +26,9 @@
         <a href="calculatorFirstNumber.jsp">
             <button name="calculator" >Calculator</button>
         </a>
+        <br/><br/>
+        <a href="product">
+            <button name="getAll" >Products</button>
+        </a>
     </body>
 </html>
