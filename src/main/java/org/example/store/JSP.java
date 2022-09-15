@@ -1,8 +1,10 @@
 package org.example.store;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
+@AllArgsConstructor
 public enum JSP {
     AUTHENTICATION("authentication.jsp"),
     CALCULATOR_FIRST_NUMBER("calculatorFirstNumber.jsp"),
@@ -12,12 +14,10 @@ public enum JSP {
     CATALOG("catalog.jsp"),
     FILES_UPLOAD("filesUpload.jsp"),
     FILE_UPLOAD("fileUpload.jsp"),
+    GET_ALL_EMPTY("getAllEmpty.jsp"),
+    GET_ALL_PRODUCTS("getAllProducts.jsp"),
     HELLO("hello.jsp"),
     INDEX("index.jsp");
 
     private final String jspName;
-
-    JSP(String jspName) {
-        this.jspName = jspName;
-    }
 }
